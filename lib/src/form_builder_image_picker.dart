@@ -343,10 +343,14 @@ class FormBuilderImagePicker extends FormBuilderFieldDecoration<List<dynamic>> {
                               width: previewAutoSizeWidth ? null : previewWidth,
                               child: itemBuilder(state.context, value.first, 0),
                             )
-                      : ListView.builder(
-                          itemExtent:
-                              previewAutoSizeWidth ? null : previewWidth,
-                          scrollDirection: Axis.horizontal,
+                      : GridView.builder(
+                          shrinkWrap: true,
+                          gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                            maxCrossAxisExtent: previewWidth,
+                            childAspectRatio: previewWidth / previewHeight,
+                            crossAxisSpacing: 10,
+                            mainAxisSpacing: 10
+                          ),
                           itemCount: itemCount,
                           itemBuilder: (context, index) {
                             return Container(
